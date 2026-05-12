@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.3.3",
     "@capacitor/camera": "^8.2.0",
     "@capacitor/cli": "^7.6.4",
     "@capacitor/core": "^8.3.3",
