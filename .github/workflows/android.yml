@@ -12,25 +12,43 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ☕ Java (ضروري لـ Gradle)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # 📦 Node
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      # 📥 Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # 📱 Install Capacitor Android (مهم جداً)
+      - name: Install Capacitor Android
+        run: npm install @capacitor/android
+
+      # 🌐 Build web app
       - name: Build web app
         run: npm run build
 
+      # 🔄 Sync Capacitor
       - name: Sync Capacitor
         run: npx cap sync android
 
+      # 🔨 Build APK
       - name: Build APK
         run: |
           cd android
+          chmod +x gradlew
           ./gradlew assembleDebug
 
+      # 📦 Upload APK
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
